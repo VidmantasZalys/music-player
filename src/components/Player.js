@@ -12,8 +12,12 @@ const Player = ({ currentSong, setIsPlaying, isPlaying }) => {
 
 	//eventai
 	const playSongHandler = () => {
-		isPlaying ? audioRef.current.pause() : audioRef.current.play();
-		setIsPlaying(!isPlaying);
+		const audioPause = audioRef.current[0];
+		console.log(audioPause);
+		isPlaying ? audioPause.pause() : audioRef.current.play();
+		setIsPlaying((prevIsPlaying) => {
+			prevIsPlaying = true;
+		});
 	};
 
 	return (

@@ -4,13 +4,14 @@ import {
 	faAngleLeft,
 	faAngleRight,
 	faPlay,
+	faPause,
 } from "@fortawesome/free-solid-svg-icons";
 
 const Player = ({ currentSong, isPlaying, setIsPlaying }) => {
 	//audio info state (laikas)
 	const [songInfo, setSongInfo] = useState({
-		currentTime: null,
-		duration: null,
+		currentTime: 0,
+		duration: 0,
 	});
 
 	//referencai paiimti audio komponenta
@@ -63,7 +64,7 @@ const Player = ({ currentSong, isPlaying, setIsPlaying }) => {
 					onClick={playSongHandler}
 					className="play"
 					size="2x"
-					icon={faPlay}
+					icon={isPlaying ? faPlay : faPause}
 				/>
 				<FontAwesomeIcon
 					className="skip-forward"

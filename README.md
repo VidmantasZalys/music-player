@@ -1,5 +1,5 @@
 # Music Player
-Music Player project for purpose to learn React. Guided by developedbyed.com React courses.
+Music Player project for purpose to learn React. Guided by https://developedbyed.com React courses.
 
 
 

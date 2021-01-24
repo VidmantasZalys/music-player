@@ -6,18 +6,20 @@ import {
 	faPlay,
 } from "@fortawesome/free-solid-svg-icons";
 
-const Player = ({ currentSong, setIsPlaying, isPlaying }) => {
+const Player = ({ currentSong, isPlaying, setIsPlaying }) => {
 	//referencai
 	const audioRef = useRef(null);
 
 	//eventai
 	const playSongHandler = () => {
-		const audioPause = audioRef.current[0];
-		console.log(audioPause);
-		isPlaying ? audioPause.pause() : audioRef.current.play();
-		setIsPlaying((prevIsPlaying) => {
+		//const audioPause = audioRef.current[0];
+		console.log(audioRef.current.pause());
+		isPlaying ? audioRef.current.pause() : audioRef.current.play();
+		/* setIsPlaying((prevIsPlaying) => {
 			prevIsPlaying = true;
-		});
+		}); */
+		setIsPlaying(!isPlaying);
+		console.log(isPlaying);
 	};
 
 	return (

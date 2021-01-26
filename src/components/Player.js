@@ -1,5 +1,4 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useRef, useState } from "react";
 import {
 	faAngleLeft,
 	faAngleRight,
@@ -7,16 +6,13 @@ import {
 	faPause,
 } from "@fortawesome/free-solid-svg-icons";
 
-const Player = ({ currentSong, isPlaying, setIsPlaying }) => {
-	//audio info state (laikas)
-	const [songInfo, setSongInfo] = useState({
-		currentTime: 0,
-		duration: 0,
-	});
-
-	//referencai paiimti audio komponenta
-	const audioRef = useRef(null);
-
+const Player = ({
+	isPlaying,
+	setIsPlaying,
+	audioRef,
+	setSongInfo,
+	songInfo,
+}) => {
 	//audio laikrodzio formatavimas mm:ss formatu
 	const getTaime = (time) => {
 		return (
@@ -27,19 +23,12 @@ const Player = ({ currentSong, isPlaying, setIsPlaying }) => {
 	//eventai
 	//paspaudus atnaujina isPlaying state is false i true ir atvirksciai ir pagal contindition state paleidzia arba sustapdo audio
 	const playSongHandler = () => {
-		console.log(audioRef.current.pause());
+		//console.log(audioRef.current.pause());
 		isPlaying ? audioRef.current.pause() : audioRef.current.play();
 		setIsPlaying(!isPlaying);
 	};
 
-	//audio laiko atnaujinimas state'e | paiimi koks buvo anksciau ir atnaujina i esama. taip pat event objekto istraukiama audio esamas laikas ir audio trukme
-	const timeUpdateHandler = (e) => {
-		const current = e.target.currentTime;
-		const duration = e.target.duration;
-		setSongInfo({ ...songInfo, currentTime: current, duration });
-	};
-
-	//dragintant input atnaujina laika ir prasuka aidio
+	//dragintant input atnaujina laika ir prasuka audio
 	const dragHanlder = (e) => {
 		audioRef.current.currentTime = e.target.value;
 		setSongInfo({ ...songInfo, currentTime: e.target.value });
@@ -64,7 +53,7 @@ const Player = ({ currentSong, isPlaying, setIsPlaying }) => {
 					onClick={playSongHandler}
 					className="play"
 					size="2x"
-					icon={isPlaying ? faPlay : faPause}
+					icon={isPlaying ? faPause : faPlay}
 				/>
 				<FontAwesomeIcon
 					className="skip-forward"
@@ -72,12 +61,6 @@ const Player = ({ currentSong, isPlaying, setIsPlaying }) => {
 					icon={faAngleRight}
 				/>
 			</div>
-			<audio
-				onLoadedMetadata={timeUpdateHandler}
-				onTimeUpdate={timeUpdateHandler}
-				ref={audioRef}
-				src={currentSong.audio}
-			></audio>
 		</div>
 	);
 };

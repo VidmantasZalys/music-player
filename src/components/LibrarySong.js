@@ -1,11 +1,34 @@
-const LibrarySong = ({ song, setCurrentSong, audioRef, isPlaying }) => {
+const LibrarySong = ({
+	song,
+	setCurrentSong,
+	audioRef,
+	isPlaying,
+	songs,
+	setSongs,
+	id,
+}) => {
 	const songSelectHandler = () => {
 		//const selectedSong = songs.filter((state) => state.id === id);
 		setCurrentSong(song);
+
+		//paiima atskirai song objekta is visu ir active nustato true arba false
+		const newSongs = songs.map((song) => {
+			if (song.id === id) {
+				return {
+					...song,
+					active: true,
+				};
+			} else {
+				return {
+					...song,
+					active: false,
+				};
+			}
+		});
 		//console.log(song);
 		//console.log(audioRef);
 		//audioRef.current.play();
-
+		setSongs(newSongs);
 		if (isPlaying) {
 			const playPromise = audioRef.current.play();
 			if (playPromise !== undefined) {
@@ -16,7 +39,10 @@ const LibrarySong = ({ song, setCurrentSong, audioRef, isPlaying }) => {
 		}
 	};
 	return (
-		<div onClick={songSelectHandler} className="library-song">
+		<div
+			onClick={songSelectHandler}
+			className={`library-song ${song.active ? "selected" : ""}`}
+		>
 			<img src={song.cover} alt={song.name} />
 			<div className="song-description">
 				<h3>{song.name}</h3>

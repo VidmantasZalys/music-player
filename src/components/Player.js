@@ -40,7 +40,7 @@ const Player = ({
 				<p>{getTaime(songInfo.currentTime)}</p>
 				<input
 					min={0}
-					max={songInfo.duration}
+					max={songInfo.duration || 0}
 					type="range"
 					value={songInfo.currentTime}
 					onChange={dragHanlder}

@@ -8,8 +8,6 @@ const Library = ({
 	setSongs,
 	libraryStatus,
 }) => {
-	//songs.map((songa) => console.log(songa));
-	//console.log(audioRef);
 	return (
 		<div className={`library ${libraryStatus ? "active-library" : ""}`}>
 			<h2>Library</h2>

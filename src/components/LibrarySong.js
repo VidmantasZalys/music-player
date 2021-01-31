@@ -7,9 +7,9 @@ const LibrarySong = ({
 	setSongs,
 	id,
 }) => {
-	const songSelectHandler = () => {
+	const songSelectHandler = async () => {
 		//const selectedSong = songs.filter((state) => state.id === id);
-		setCurrentSong(song);
+		await setCurrentSong(song);
 
 		//paiima atskirai song objekta is visu ir active nustato true arba false
 		const newSongs = songs.map((song) => {
@@ -29,14 +29,7 @@ const LibrarySong = ({
 		//console.log(audioRef);
 		//audioRef.current.play();
 		setSongs(newSongs);
-		if (isPlaying) {
-			const playPromise = audioRef.current.play();
-			if (playPromise !== undefined) {
-				playPromise.then((audio) => {
-					audioRef.current.play();
-				});
-			}
-		}
+		if (isPlaying) audioRef.current.play();
 	};
 	return (
 		<div
